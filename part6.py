@@ -6,6 +6,21 @@
 # Import Random
 import random
 
+# function to sort list largest to smallest
+def sortList(l):
+    for index in range(1,len(l)):
+        value = l[index]
+        i = index-1
+        while i>=0:
+            # if l[i] is less than value. then make l[i+1] = l[i]. eventually pushing the lower numbers to the end of the list
+            if value > l[i]:
+                l[i+1] = l[i]
+                l[i] = value
+                i -= 1
+            else:
+                break    
+    return l
+
 # Declare a list and variables
 my_list = []
 num = 0
@@ -20,7 +35,7 @@ while (n != 5):
         n = n + 1
 
 # Print out unordered list
-print(my_list)
+print("This is my unordered list" +str(my_list))
 
-# Print out ordered list from highest to lowest. Code adapted from: http://pythoncentral.io/how-to-sort-a-list-tuple-or-object-with-sorted-in-python/
-print(sorted(my_list, reverse=True))
+# Print out ordered list from highest to lowest. Code adapted from: https://stackoverflow.com/questions/11964450/python-order-a-list-of-numbers-without-built-in-sort-min-max-function
+print("This is my ordered list largest to smallest " +str(sortList(my_list)))
