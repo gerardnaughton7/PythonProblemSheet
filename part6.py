@@ -6,20 +6,29 @@
 # Import Random
 import random
 
-# function to sort list largest to smallest
+# function to find largest and smallest
 def sortList(l):
-    for index in range(1,len(l)):
-        value = l[index]
-        i = index-1
-        while i>=0:
-            # if l[i] is less than value. then make l[i+1] = l[i]. eventually pushing the lower numbers to the end of the list
-            if value > l[i]:
-                l[i+1] = l[i]
-                l[i] = value
-                i -= 1
-            else:
-                break    
-    return l
+    min_value = None
+    max_value = None
+    # Loop around list
+    for value in l:
+        if not min_value:
+            min_value = value
+        elif value < min_value:
+            min_value = value
+        if not max_value:
+            max_value = value
+        elif value > max_value:
+            max_value = value
+    # Return the max and min number
+    return  "Max number is "+ str(max_value) + " and Min number is "+ str(min_value) +"."
+
+# Alternatively you can do this 
+def sortList2(l):
+    large = max(l)
+    small = min(l)
+
+    return "Max number is "+ str(large) + " and Min number is "+ str(small) +"."
 
 # Declare a list and variables
 my_list = []
@@ -37,5 +46,7 @@ while (n != 5):
 # Print out unordered list
 print("This is my unordered list" +str(my_list))
 
-# Print out ordered list from highest to lowest. Code adapted from: https://stackoverflow.com/questions/11964450/python-order-a-list-of-numbers-without-built-in-sort-min-max-function
-print("This is my ordered list largest to smallest " +str(sortList(my_list)))
+# Print out Largest and smallest in the list. Code adapted from: https://stackoverflow.com/questions/27009247/python-find-min-max-and-average-of-a-list-array
+print("Using first function the " + sortList(my_list))
+# Second function sortList2
+print("Using second function the " + sortList2(my_list))
