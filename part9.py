@@ -6,40 +6,41 @@
 #To begin with, just repeat that calculation 10 times and see how close you get to the answer for various values (1, 2, 3, …). Next, change the loop condition to stop once the value has stopped changing (or only changes by a very small delta). How close are you to the math.sqrt value?
 
 import math
-# Adapted from : https://stackoverflow.com/questions/12850100/finding-the-square-root-using-newtons-method-errors
-# function
+# function loops through the function 10 times to find the answer
 def sqRoot1(x, n):
-    estimate = (0.5*(x+(n/x)))
-    print (estimate)
-    for i in range(0,10):
-        estimate = (0.5*(estimate+(n/estimate)))
+    estimate = x - ((x*x - n) / (2 * x))
+    print(estimate)
+    for i in range(0,9):
+        estimate = estimate - ((estimate*estimate - n) / (2 * estimate))
         print (estimate)
 
-# function
+# function loops through the function until the estimate starts to repeat itself
 def sqRoot2(x, n):
-    newEstimate = float(x)
+    oldEstimate = float(x)
     same = False
-    estimate = (0.5*(x+(n/x)))
+    estimate = x - ((x*x - n) / (2 * x))
     print (estimate)
     while(same == False):
-        if newEstimate == estimate:
+        if oldEstimate == estimate:
             print(estimate)
             same = True
         else:
             print(estimate)
-            newEstimate = estimate
-            estimate = (0.5*(estimate+(n/estimate)))
+            oldEstimate = estimate
+            estimate = estimate - ((estimate*estimate - n) / (2 * estimate))
     return estimate
 
-#take in value
+#take in values
 n = int(input("Enter value you wish to get the square root of? "))
 x = int(input("Estimate your answer/starting point? "))
 
-#call function
+#call function sqRoot1
 print("Here is function 1 which loops 10 times")
 sqRoot1(x, n)
+# call function sqRoot2
 print("Here is function 2 which loops until the answer stops changing")
 newton = sqRoot2(x, n)
+# Check difference for newtons method and math.sqrt
 print("Now we will check the difference between newtons method and the math.sqrt value.")
 y = math.sqrt(n)
 print("The Answer from the math.sqrt is: "+ str(y))
